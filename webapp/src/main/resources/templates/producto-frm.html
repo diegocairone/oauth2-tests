@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta charset="UTF-8">
+	<title>Lista de productos</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/webjars/font-awesome/5.6.1/css/all.min.css}"/>
+</head>
+<body>
+<div class="container">
+	<div class="row mt-3">
+		<div class="col-sm">
+			
+			<form action="#" th:object="${producto}" method="post">
+				<div class="form-group">
+					<label for="codigo">C&oacute;digo</label>
+					<input type="text" class="form-control text-uppercase" id="codigo" aria-describedby="codigo" placeholder="Codigo del producto" autocomplete="off" th:autofocus="${not disabled}" th:disabled="${disabled}" th:field="*{id}" th:errorclass="is-invalid">
+					<div class="invalid-feedback">
+			          El codigo del producto no es valido!
+			        </div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Nombre</label>
+					<input type="text" class="form-control text-uppercase" id="nombre" aria-describedby="nombre" placeholder="Nombre del producto" autocomplete="off" th:autofocus="${disabled}" th:field="*{nombre}" th:errorclass="is-invalid">
+					<div class="invalid-feedback">
+			          El nombre del producto no es valido!
+			        </div>
+				</div>
+				<div class="form-group">
+					<label for="descripcion">Descripci&oacute;n</label>
+					<input type="text" class="form-control text-uppercase" id="descripcion" aria-describedby="descripcion" placeholder="Descripci&oacute;n del producto" autocomplete="off" th:field="*{descripcion}" th:errorclass="is-invalid">
+					<div class="invalid-feedback">
+			          La descripcion del producto no es valida!
+			        </div>
+				</div>
+			  
+				<button type="submit" class="btn btn-primary">Aceptar</button>
+				<a class="btn btn-default btn-xs" th:href="@{/productos/lista}">
+                    Volver
+                </a>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
