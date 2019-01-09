@@ -11,6 +11,5 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		
 		registry.addViewController("/login").setViewName("login-frm");
-		registry.addViewController("/login-error").setViewName("login-error-frm");
 	}
 }
