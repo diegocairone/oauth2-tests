@@ -3,11 +3,29 @@
     <head>
         <title>Error page</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" th:href="@{/webjars/font-awesome/5.6.1/css/all.min.css}"/>
     </head>
     <body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
-        <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
-        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
-        <a href="index.html" th:href="@{/index.html}">Back to Home Page</a>
+        
+        <div class="container">
+		    <div class="row mt-5">
+		        <div class="col-md-12">
+		            <div class="error-template">
+		                <h2 th:text="${httpStatus.reasonPhrase}">404 Not Found</h2>
+		                <div class="alert alert-danger" role="alert" th:utext="${errorMessage}">
+						  A simple danger alert—check it out!
+						</div>
+		                <div class="error-actions">
+		                    <a th:href="@{/}" class="btn btn-primary btn-lg">
+		                    	<span class="fas fa-home"></span>
+		                        P&aacute;gina de inicio </a>
+		                    
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
     </body>
 </html>
