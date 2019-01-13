@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cairone.example.webapp.domain.UsuarioEntity;
+import com.cairone.example.webapp.oauth2.UserPrincipal;
 import com.cairone.example.webapp.repositories.UsuarioRepository;
 
 @Service
@@ -28,8 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			LOG.error("No se encuentra el usuario: {}", username);
 			throw new UsernameNotFoundException("No se encuentra el usuario: " + username);
 		}
-		usuarioEntity.getAuthorities();
 		
-		return usuarioEntity;
+		return UserPrincipal.create(usuarioEntity);
 	}
 }

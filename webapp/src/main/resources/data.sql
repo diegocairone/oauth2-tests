@@ -21,7 +21,7 @@
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'MESA','MESA SUPER'),(2,'MONITOR','MONITOR 19\" LG'),(3,'ROUTER','ROUTER PL LINK'),(4,'MOTOG','MOTO G6');
+INSERT INTO `productos` VALUES (1,'MESA-2','MESA SUPER'),(2,'MONITOR','MONITOR 19\" LG'),(3,'NUEVO','NUEVO');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'DIEGO CAIRONE','diego.cairone','$2a$10$QLI/L0fryg7CegxshiKIiesXFNV12auN3YGcFT94/iGxqFLNNlxUy',1,1,1,1);
+INSERT INTO `usuarios` VALUES (1,'Diego Cairone','diego.cairone','$2a$10$QLI/L0fryg7CegxshiKIiesXFNV12auN3YGcFT94/iGxqFLNNlxUy','diegocairone@gmail.com',1,1,1,1,'github',NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-09 13:53:16
+-- Dump completed on 2019-01-13 13:42:28

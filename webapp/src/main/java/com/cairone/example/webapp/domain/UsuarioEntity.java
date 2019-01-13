@@ -1,12 +1,12 @@
 package com.cairone.example.webapp.domain;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,16 +15,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.cairone.example.webapp.oauth2.AuthProvider;
 
 @Entity @Table(name="usuarios", uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"username"})
 	})
-public class UsuarioEntity implements UserDetails {
-
-	private static final long serialVersionUID = 1L;
+public class UsuarioEntity {
 
 	@Id @Column(name="usuario_id")
 	private Long id = null;
@@ -38,6 +34,9 @@ public class UsuarioEntity implements UserDetails {
 	@Column(name="password", length=200, nullable=false)
 	private String password = null;
 	
+	@Column(name="correo_electronico", length=200, nullable=false, unique=true)
+	private String correoElectronico = null;
+	
 	@Column(name="account_non_expired", nullable=false)
 	private boolean accountNonExpired = true;
 	
@@ -50,7 +49,13 @@ public class UsuarioEntity implements UserDetails {
 	@Column(name="is_enabled", nullable=false)
 	private boolean isEnabled = true;
 	
-	@ManyToMany(fetch = FetchType.LAZY) @JoinTable(name = "usuarios_roles",
+	@Column(name="provider", nullable=true) @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
+	@Column(name="provider_id", nullable=true)
+    private String providerId;
+	
+	@ManyToMany(fetch = FetchType.EAGER) @JoinTable(name = "usuarios_roles",
 			joinColumns = @JoinColumn(name = "usuario_id"),
 			inverseJoinColumns = @JoinColumn(name = "rol_id"))
 	private Set<RolEntity> roles = new HashSet<>();
@@ -90,6 +95,14 @@ public class UsuarioEntity implements UserDetails {
 		this.password = password;
 	}
 
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
 	public boolean isAccountNonExpired() {
 		return accountNonExpired;
 	}
@@ -120,6 +133,22 @@ public class UsuarioEntity implements UserDetails {
 
 	public void setIsEnabled(Boolean isEnabled) {
 		this.isEnabled = isEnabled;
+	}
+
+	public AuthProvider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(AuthProvider provider) {
+		this.provider = provider;
+	}
+
+	public String getProviderId() {
+		return providerId;
+	}
+
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
 	}
 
 	public Set<RolEntity> getRoles() {
@@ -158,12 +187,5 @@ public class UsuarioEntity implements UserDetails {
 	@Override
 	public String toString() {
 		return "UsuarioEntity [id=" + id + ", username=" + username + "]";
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return roles.stream().map(rol -> 
-				new SimpleGrantedAuthority(rol.getNombre()) 
-			).collect(Collectors.toList());
 	}
 }

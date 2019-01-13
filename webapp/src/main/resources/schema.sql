@@ -60,12 +60,16 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(200) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL,
+  `correo_electronico` varchar(200) NOT NULL,
   `account_non_expired` tinyint(1) NOT NULL DEFAULT '1',
   `is_account_non_locked` tinyint(1) NOT NULL DEFAULT '1',
   `is_credentials_non_expired` tinyint(1) NOT NULL DEFAULT '1',
   `is_enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `provider` varchar(45) DEFAULT NULL,
+  `provider_id` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`usuario_id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `correo_electronico_UNIQUE` (`correo_electronico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -95,4 +99,4 @@ CREATE TABLE `usuarios_roles` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-09 13:52:20
+-- Dump completed on 2019-01-13 13:42:59
