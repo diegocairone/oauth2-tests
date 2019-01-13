@@ -21,12 +21,10 @@ import com.cairone.example.webapp.repositories.UsuarioRepository;
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-//	private static final Logger LOG = LogManager.getLogger();
-	
 	@Autowired private UsuarioRepository usuarioRepository = null;
 	@Autowired private PasswordEncoder passwordEncoder = null;
 
-	@Override
+	@Override @Transactional(readOnly=true)
 	public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
 		
 		OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
@@ -41,7 +39,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 	}
 
-	@Transactional(readOnly=true)
     private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
         
     	OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
@@ -53,7 +50,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         UsuarioEntity user = null;
         if(userOptional.isPresent()) {
         	user = userOptional.get();
-        	user.getRoles();
             if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
                 throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
                         user.getProvider() + " account. Please use your " + user.getProvider() +

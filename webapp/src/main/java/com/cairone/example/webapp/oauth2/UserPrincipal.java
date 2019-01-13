@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +17,7 @@ import com.cairone.example.webapp.domain.UsuarioEntity;
 public class UserPrincipal implements OAuth2User, UserDetails {
 	
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = LoggerFactory.getLogger(UserPrincipal.class);
 	
 	private Long id;
     private String email;
@@ -31,11 +34,12 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     public static UserPrincipal create(UsuarioEntity usuarioEntity) {
         List<GrantedAuthority> authorities = 
-        		usuarioEntity.getRoles().stream().map(rol -> 
-					new SimpleGrantedAuthority(rol.getNombre()) 
-        				).collect(Collectors.toList());
-//        		Collections.
-//                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+    		usuarioEntity.getRoles().stream()
+    		.map(rol -> { 
+    			if(logger.isDebugEnabled()) logger.debug("{} IS IN ROLE {}", usuarioEntity, rol);
+				return new SimpleGrantedAuthority(rol.getNombre()); 
+    		})
+    		.collect(Collectors.toList());
 
         return new UserPrincipal(
         		usuarioEntity.getId(),

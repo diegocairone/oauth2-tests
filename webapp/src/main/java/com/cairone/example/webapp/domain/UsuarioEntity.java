@@ -55,7 +55,7 @@ public class UsuarioEntity {
 	@Column(name="provider_id", nullable=true)
     private String providerId;
 	
-	@ManyToMany(fetch = FetchType.EAGER) @JoinTable(name = "usuarios_roles",
+	@ManyToMany(fetch = FetchType.LAZY) @JoinTable(name = "usuarios_roles",
 			joinColumns = @JoinColumn(name = "usuario_id"),
 			inverseJoinColumns = @JoinColumn(name = "rol_id"))
 	private Set<RolEntity> roles = new HashSet<>();
