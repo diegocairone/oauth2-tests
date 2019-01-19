@@ -16,3 +16,23 @@ spring:
     output:
       ansi:
         enabled: always
+        
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        clientId: 943762964048-stcr9kjmci60kp7menernu6kdj5ovc1o.apps.googleusercontent.com
+                        clientSecret: tkTSqgolZI4Gy1NDQz4uc_6T
+                        redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+                        scope:
+                            - email
+                            - profile
+                    github:
+                        clientId: 894e34453c87c36c1f17
+                        clientSecret: adf700237d58eb0387293bd48c130e647a80405c
+                        redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+                        scope:
+                            - user:email
+                            - read:user
+                            
