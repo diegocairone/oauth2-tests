@@ -11,6 +11,8 @@ public class OAuth2UserInfoFactory {
             return new GoogleOAuth2UserInfo(attributes);
         } else if(registrationId.equalsIgnoreCase(AuthProvider.github.toString())) {
         	return new GithubOAuth2UserInfo(attributes);
+        } else if(registrationId.equalsIgnoreCase(AuthProvider.eivas.toString())) {
+        	return new EivasOAuth2UserInfo(attributes);
         } else {
             throw new OAuth2AuthenticationProcessingException("Sorry! Login with " + registrationId + " is not supported yet.");
         }

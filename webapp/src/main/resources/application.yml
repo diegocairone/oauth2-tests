@@ -22,17 +22,34 @@ spring:
             client:
                 registration:
                     google:
-                        clientId: 943762964048-stcr9kjmci60kp7menernu6kdj5ovc1o.apps.googleusercontent.com
-                        clientSecret: tkTSqgolZI4Gy1NDQz4uc_6T
+                        clientId: client-id
+                        clientSecret: client-secret
                         redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
                         scope:
                             - email
                             - profile
                     github:
-                        clientId: 894e34453c87c36c1f17
-                        clientSecret: adf700237d58eb0387293bd48c130e647a80405c
+                        clientId: client-id
+                        clientSecret: client-secret
                         redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
                         scope:
                             - user:email
                             - read:user
-                            
+                    eivas:
+                        clientId: client-id
+                        clientSecret: client-secret
+                        redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+                        scope:
+                            - email
+                            - profile
+                        client-name: Eiv AS
+                        provider: eivas
+                        client-authentication-method: basic
+                        authorization-grant-type: authorization_code
+                
+                provider:
+                    eivas:
+                        authorization-uri: http://192.168.1.100:8081/oauth/authorize
+                        token-uri: http://192.168.1.100:8081/oauth/token
+                        user-info-uri: http://192.168.1.100:8081/me
+                        user-name-attribute: username

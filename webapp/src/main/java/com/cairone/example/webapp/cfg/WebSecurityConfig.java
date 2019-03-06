@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 
 import com.cairone.example.webapp.oauth2.CustomOAuth2UserService;
 
@@ -33,6 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.authenticated()
         .and()
         .oauth2Login()
+	        .tokenEndpoint()
+	        	.accessTokenResponseClient(accessTokenResponseClient())
+	        .and()
 		        .authorizationEndpoint()
 		        .baseUri("/oauth2/authorize")
 		        .and()
@@ -42,6 +48,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		    .userInfoEndpoint()
 		        .userService(customOAuth2UserService);	
 	}
+	
+	@Bean
+    public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> accessTokenResponseClient() {
+        DefaultAuthorizationCodeTokenResponseClient accessTokenResponseClient = new DefaultAuthorizationCodeTokenResponseClient();
+        return accessTokenResponseClient;
+    }
 	
 	@Bean
     public PasswordEncoder passwordEncoder() {
