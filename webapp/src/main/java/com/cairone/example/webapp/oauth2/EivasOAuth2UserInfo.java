@@ -10,7 +10,7 @@ public class EivasOAuth2UserInfo extends OAuth2UserInfo {
 
     @Override
     public String getId() {
-        return ((Integer) attributes.get("id")).toString();
+        return attributes.get("id").toString();
     }
 
     @Override
