@@ -5,7 +5,7 @@ spring:
             minimum-idle: 1
             maximum-pool-size: 5
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost/oauth2-dummy-api
+        jdbc-url: jdbc:mysql://localhost/oauth2-dummy-api?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password: 
     jpa:
@@ -36,8 +36,8 @@ spring:
                             - user:email
                             - read:user
                     eivas:
-                        clientId: client-id
-                        clientSecret: client-secret
+                        clientId: da34bd0192222531d60922e683181475.PVA.eiv.com.ar
+                        clientSecret: 9761ff5e398074005a01364531a29dae
                         redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
                         scope:
                             - email
@@ -49,7 +49,7 @@ spring:
                 
                 provider:
                     eivas:
-                        authorization-uri: http://192.168.1.100:8081/oauth/authorize
-                        token-uri: http://192.168.1.100:8081/oauth/token
-                        user-info-uri: http://192.168.1.100:8081/me
-                        user-name-attribute: username
+                        authorization-uri: http://eq016:8081/oauth/authorize
+                        token-uri: http://eq016:8081/oauth/token
+                        user-info-uri: http://eq016:8081/me
+                        user-name-attribute: name
