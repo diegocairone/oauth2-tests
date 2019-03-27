@@ -37,7 +37,7 @@ spring:
                             - read:user
                     eivas:
                         clientId: da34bd0192222531d60922e683181475.PVA.eiv.com.ar
-                        clientSecret: 9761ff5e398074005a01364531a29dae
+                        clientSecret: cb5b45aff40851363b2cb26214fd25c9
                         redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
                         scope:
                             - email
@@ -52,4 +52,4 @@ spring:
                         authorization-uri: http://eq016:8081/oauth/authorize
                         token-uri: http://eq016:8081/oauth/token
                         user-info-uri: http://eq016:8081/me
-                        user-name-attribute: name
+                        user-name-attribute: username
